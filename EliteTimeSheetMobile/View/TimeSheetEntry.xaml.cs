@@ -17,12 +17,11 @@ namespace EliteTimeSheetMobile.View
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class TimeSheetEntry : ContentPage
     {
-
         private ITimeSheetStore _timeSheetStore;
         private TimeSheet _timeSheet;
         public TimeSheetEntry()
         {
-             _timeSheetStore = new SQLiteTimeSheetStore(DependencyService.Get<ISQLiteDb>());
+            _timeSheetStore = new SQLiteTimeSheetStore(DependencyService.Get<ISQLiteDb>());
             InitializeComponent();
         }
         void saveButton_Clicked( object sender,System.EventArgs e)
@@ -41,21 +40,15 @@ namespace EliteTimeSheetMobile.View
                 SupSignature="SupSignature"
             };
 
-            var timesheets = _timeSheetStore.GetTimeSheetAsync();
-            Console.WriteLine("time sheet", timesheets);
-             _ = _timeSheetStore.AddTimeSheet(timesheet);
-
+            _ = _timeSheetStore.AddTimeSheet(timesheet);
         }
         async void reportButton_Clicked(object sender, System.EventArgs e)
         {
               var timesheets = await _timeSheetStore.GetTimeSheetAsync();
               CreatePD(timesheets);
         }
-
         private void CreatePD(IEnumerable<TimeSheet> timesheets)
         {
-            Console.WriteLine("enumerate", timesheets);
-         
             foreach (var timeSheet in timesheets)
             {
                 _timeSheet = timeSheet; 
