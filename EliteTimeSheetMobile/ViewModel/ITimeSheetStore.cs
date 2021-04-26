@@ -10,7 +10,7 @@ namespace EliteTimeSheetMobile.ViewModel
     {
 
         Task<IEnumerable<TimeSheet>> GetTimeSheetAsync();
-        Task AddContact(TimeSheet contact);
+        Task AddTimeSheet(TimeSheet timesheet);
 
     }
 }
