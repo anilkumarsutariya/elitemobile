@@ -30,7 +30,7 @@ namespace EliteTimeSheetMobile.Persistance
 
         }
 
-        public async Task AddContact(TimeSheet contact)
+        public async Task AddTimeSheet(TimeSheet contact)
         {
             int count = await _connection.InsertAsync(contact);
             Console.WriteLine("COUNT",count);
