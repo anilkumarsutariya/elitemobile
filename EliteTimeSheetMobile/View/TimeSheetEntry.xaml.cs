@@ -43,7 +43,7 @@ namespace EliteTimeSheetMobile.View
 
             var timesheets = _timeSheetStore.GetTimeSheetAsync();
             Console.WriteLine("time sheet", timesheets);
-             _ = _timeSheetStore.AddContact(timesheet);
+             _ = _timeSheetStore.AddTimeSheet(timesheet);
 
         }
         async void reportButton_Clicked(object sender, System.EventArgs e)
