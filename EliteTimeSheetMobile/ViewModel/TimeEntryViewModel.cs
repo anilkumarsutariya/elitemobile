@@ -53,7 +53,7 @@ namespace EliteTimeSheetMobile.ViewModel
            
             if (TimeSheet.Id == 0)
             {
-                await _timeSheetStore.AddContact(TimeSheet);
+               // await _timeSheetStore.AddContact(TimeSheet);
                 //MessagingCenter.Send(this, Events.ContactAdded, Contact);
             }
            

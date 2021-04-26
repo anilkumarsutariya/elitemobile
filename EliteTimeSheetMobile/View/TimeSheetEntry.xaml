@@ -23,7 +23,6 @@
                 </Entry>
                 <Entry x:Name="comments" Text="{Binding Comments}" Placeholder="Comments" Margin="10,5">
                 </Entry>
-                <Button x:Name="reportButton" Text="Report" Clicked="reportButton_Clicked" TextColor="White" BackgroundColor="DarkRed" Margin="30,30"></Button>
                 <Button x:Name="loginButton" Text="Submit" Clicked="saveButton_Clicked" TextColor="White" BackgroundColor="DarkRed" Margin="30,30"></Button>
             </StackLayout>
         </StackLayout>
