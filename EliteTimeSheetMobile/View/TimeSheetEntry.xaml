@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EliteTimeSheetMobile.View.TimeSheetEntry">
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout>
+                <Label Text="Time Sheet Entry" Margin="0,30,0,10" FontSize="Title"
+                HorizontalOptions="Center" />
+                <Entry x:Name="name" Text="{Binding Name}" Placeholder="Name" Margin="10,5">
+                </Entry>
+                <Entry x:Name="facility" Text="{Binding Facility}" Placeholder="Facility" Margin="10,5">
+                </Entry>
+                <Entry x:Name="supervisiorName" Text="{Binding SupervisiorName}" Placeholder="Supervisior Name" Margin="10,5">
+                </Entry>
+                <Entry x:Name="date" Text="{Binding Date}" Placeholder="Date" Margin="10,5">
+                </Entry>
+                <Entry x:Name="timeIn" Text="{Binding TimeIn}" Placeholder="Time IN" Margin="10,5">
+                </Entry>
+                <Entry x:Name="timeOut" Text="{Binding TimeOut}" Placeholder="Time Out" Margin="10,5">
+                </Entry>
+                <Entry x:Name="lunch" Text="{Binding Lunch}" Placeholder="Lunch" Margin="10,5">
+                </Entry>
+                <Entry x:Name="comments" Text="{Binding Comments}" Placeholder="Comments" Margin="10,5">
+                </Entry>
+                <Button x:Name="reportButton" Text="Report" Clicked="reportButton_Clicked" TextColor="White" BackgroundColor="DarkRed" Margin="30,30"></Button>
+                <Button x:Name="loginButton" Text="Submit" Clicked="saveButton_Clicked" TextColor="White" BackgroundColor="DarkRed" Margin="30,30"></Button>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
