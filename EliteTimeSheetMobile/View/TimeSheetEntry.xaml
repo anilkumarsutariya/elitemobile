@@ -13,11 +13,11 @@
                 </Entry>
                 <Entry x:Name="supervisiorName" Text="{Binding SupervisiorName}" Placeholder="Supervisior Name" Margin="10,5">
                 </Entry>
-                <Entry x:Name="date" Text="{Binding Date}" Placeholder="Date" Margin="10,5">
+                <Entry x:Name="date" Text="{Binding Date}" Placeholder="Date(11/03/2021)" Margin="10,5">
                 </Entry>
-                <Entry x:Name="timeIn" Text="{Binding TimeIn}" Placeholder="Time IN" Margin="10,5">
+                <Entry x:Name="timeIn" Text="{Binding TimeIn}" Placeholder="Time IN(10AM)" Margin="10,5">
                 </Entry>
-                <Entry x:Name="timeOut" Text="{Binding TimeOut}" Placeholder="Time Out" Margin="10,5">
+                <Entry x:Name="timeOut" Text="{Binding TimeOut}" Placeholder="Time Out(5M)" Margin="10,5">
                 </Entry>
                 <Entry x:Name="lunch" Text="{Binding Lunch}" Placeholder="Lunch" Margin="10,5">
                 </Entry>
