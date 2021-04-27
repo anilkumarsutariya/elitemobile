@@ -9,6 +9,7 @@ namespace EliteTimeSheetMobile
    public interface ISave
     {
         Task SaveAndView(string filename, string contentType, MemoryStream stream);
+        Task<string> SaveSignature(Stream bitmap, string filename);
     }
 }
 

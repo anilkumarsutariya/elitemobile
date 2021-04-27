@@ -18,12 +18,15 @@ namespace EliteTimeSheetMobile.View
         {
     
             InitializeComponent();
+            NavigationPage.SetHasNavigationBar(this, false);
+            LogoImage.Source = ImageSource.FromResource("EliteTimeSheetMobile.Assets.logo.png");
         }
 
         async void loginButton_Clicked(object sender, System.EventArgs e)
         {
             var pageService = new PageService();
-            await pageService.PushAsync(new TimeSheetEntry());
+            await Navigation.PushAsync(new HomePage());
+            //await pageService.PushAsync(new HomePage());
         }
     }
 }

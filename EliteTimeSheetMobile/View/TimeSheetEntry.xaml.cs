@@ -11,18 +11,23 @@ using System.Reflection;
 using System.IO;
 using EliteTimeSheetMobile.ViewModel;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using SignaturePad.Forms;
 
 namespace EliteTimeSheetMobile.View
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class TimeSheetEntry : ContentPage
     {
+        int SignatureType = 0;
         private ITimeSheetStore _timeSheetStore;
         private TimeSheet _timeSheet;
         public TimeSheetEntry()
         {
             _timeSheetStore = new SQLiteTimeSheetStore(DependencyService.Get<ISQLiteDb>());
             InitializeComponent();
+            SignatureType = 0;
+            popupImageView.IsVisible = false;
         }
         void saveButton_Clicked( object sender,System.EventArgs e)
         {
@@ -208,6 +213,100 @@ namespace EliteTimeSheetMobile.View
             stream.Position = 0;
             //Save the stream as a file in the device and invoke it for viewing
             DependencyService.Get<ISave>().SaveAndView("TimeSheet.pdf", "application/pdf", stream);
+
+        }
+
+
+        private void btnPopupButton_Clicked(object sender, EventArgs e)
+        {
+            popupSignatureView.IsVisible = true;
+            signatureSample.CaptionText = "Employee Signature";
+            signatureSample.Clear();
+            SignatureType = 1;
+
+        }
+
+        private void btnPopupSupervisor_Clicked(object sender, EventArgs e)
+        {
+            popupSignatureView.IsVisible = true;
+            signatureSample.CaptionText = "Supervisor Signature";
+            signatureSample.Clear();
+            SignatureType = 2;
+        }
+        private void btnPopupClose_Clicked(object sender, EventArgs e)
+        {
+            popupSignatureView.IsVisible = false;
+
+
+        }
+        private void btnPopupSave_Clicked(object sender, EventArgs e)
+        {
+
+            popupSignatureView.IsVisible = false;
+            _ = NewMethod();
+
+        }
+
+        private void btnImagePopupClose_Clicked(object sender, EventArgs e)
+        {
+            popupImageView.IsVisible = false;
+        }
+
+        private void OnEmployee_SignTapped(object sender, EventArgs e)
+        {
+            popupImageView.IsVisible = true;
+            img_Preview_Sign.Source = img_Employee_Sign.Source;
+
+        }
+        private void OnSupervisior_SignTapped(object sender, EventArgs e)
+        {
+            popupImageView.IsVisible = true;
+            img_Preview_Sign.Source = img_Supervisior_Sign.Source;
+
+        }
+
+
+        private async Task NewMethod()
+        {
+            try
+            {
+
+                String path;
+                using (var bitmap = await signatureSample.GetImageStreamAsync(SignatureImageFormat.Png, System.Drawing.Color.Black, System.Drawing.Color.White, 1f))
+                {
+                    if (SignatureType == 1)
+                    {
+                        path = await DependencyService.Get<ISave>().SaveSignature(bitmap, "empsignature.png");
+                    }
+                    else
+                    {
+                        path = await DependencyService.Get<ISave>().SaveSignature(bitmap, "supervisorsignature.png");
+                    }
+
+                }
+
+                if (path.Trim().Length > 0)
+                {
+                    if (SignatureType == 1)
+                    {
+                        img_Employee_Sign.Source = ImageSource.FromFile(path);
+                    }
+                    else
+                    {
+                        img_Supervisior_Sign.Source = ImageSource.FromFile(path);
+                    }
+
+                    //await DisplayAlert("Signature Pad", "Raster signature saved to the photo library.", "OK");
+                }
+                else
+                    await DisplayAlert("Signature Pad", "There was an error saving the signature.", "OK");
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Signature Pad", "There was an error saving the signature.", "OK");
+
+                ex.ToString();
+            }
 
         }
 

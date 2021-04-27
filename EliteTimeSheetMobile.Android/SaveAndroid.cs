@@ -66,4 +66,26 @@ class SaveAndroid : ISave
             Forms.Context.StartActivity(Intent.CreateChooser(intent, "Choose App"));
         }
     }
+
+    public async Task<String> SaveSignature(Stream bitmap, string filename)
+    {
+        var path = Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryPictures).AbsolutePath;
+        var file = Path.Combine(path, filename);
+        try
+        {
+            using (var dest = System.IO.File.OpenWrite(file))
+            {
+                await bitmap.CopyToAsync(dest);
+            }
+        }
+        catch (Exception ex)
+        {
+            ex.ToString();
+            file = "";
+        }
+
+
+        return file;
+    }
+
 }

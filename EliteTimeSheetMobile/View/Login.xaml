@@ -1,16 +1,49 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="EliteTimeSheetMobile.View.Login">
+             x:Class="EliteTimeSheetMobile.View.Login"
+             xmlns:local="clr-namespace:EliteTimeSheetMobile"
+             xmlns:custom="clr-namespace:EliteTimeSheetMobile">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Login" Margin="0,30,0,10" FontSize="Title"
-                HorizontalOptions="Center" />
-            <Entry x:Name="userName" Text="{Binding UserName}" Placeholder="User Name" Margin="10,10">
-            </Entry>
-            <Entry x:Name="password" Text="{Binding Password}" Placeholder="Password" Margin="10,10">
-             </Entry>
-            <Button x:Name="loginButton" Clicked="loginButton_Clicked" Text="Login" TextColor="White" BackgroundColor="DarkRed" Margin="30,30"></Button>
+        <StackLayout VerticalOptions="Center">
+            <Image x:Name="LogoImage"
+                   Margin="0,70,0,10"
+                   HorizontalOptions="Center" />
+            <custom:CustomEntry x:Name="userName"
+                                CornerRadius="18"
+                                Margin="20,20,20,10"
+                                Text="{Binding UserName}"
+                                IsCurvedCornersEnabled="True"
+                                HorizontalTextAlignment="Center"
+                                FontSize="17"
+                                BorderColor="Maroon"
+                                BorderWidth="5"
+                                HeightRequest="60"
+                                Placeholder="User Name"
+                                PlaceholderColor="Gray"
+                                TextColor="Black"
+                                WidthRequest="100" />
+            <custom:CustomEntry x:Name="password"
+                                CornerRadius="18"
+                                Margin="20,20"
+                                Text="{Binding Password}"
+                                IsCurvedCornersEnabled="True"
+                                HorizontalTextAlignment="Center"
+                                FontSize="17"
+                                BorderColor="Maroon"
+                                BorderWidth="5"
+                                HeightRequest="60"
+                                Placeholder="Password"
+                                PlaceholderColor="Gray"
+                                TextColor="Black"
+                                WidthRequest="100" />
+            <Button x:Name="loginButton" Clicked="loginButton_Clicked" Text="Login"
+                    TextColor="Maroon"
+                    BorderColor="#1F85DE"
+                    BorderWidth="2"
+                    Background="#FFFFFF"
+                    CornerRadius="10"
+                    Margin="30,30"></Button>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
