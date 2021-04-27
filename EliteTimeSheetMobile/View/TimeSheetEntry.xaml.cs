@@ -19,10 +19,15 @@ namespace EliteTimeSheetMobile.View
     {
         private ITimeSheetStore _timeSheetStore;
         private TimeSheet _timeSheet;
+        private string date;
         public TimeSheetEntry()
         {
             _timeSheetStore = new SQLiteTimeSheetStore(DependencyService.Get<ISQLiteDb>());
             InitializeComponent();
+        }
+        private void MainDatePicker_DateSelected(object sender, DateChangedEventArgs e)
+        {
+              date = e.NewDate.ToLongDateString();
         }
         void saveButton_Clicked( object sender,System.EventArgs e)
         {
@@ -31,10 +36,10 @@ namespace EliteTimeSheetMobile.View
                 Name = name.Text,
                 Facility = facility.Text,
                 SupervisiorName = supervisiorName.Text,
-                Date=date.Text,
-                InTime= timeIn.Text,
-                OutTime=timeOut.Text,
-                Lunch=lunch.Text,
+                Date=date,
+                InTime= InTimePicker.ToString(),
+                OutTime= OutTimePicker.ToString(),
+                Lunch =lunch.Text,
                 Comments= comments.Text,
                 EmpSignature="Signature",
                 SupSignature="SupSignature"
@@ -129,8 +134,7 @@ namespace EliteTimeSheetMobile.View
             pdfLightTable.Columns.Add(new PdfColumn("Out Time"));
             //Add row        
             pdfLightTable.Rows.Add(new string[] { _timeSheet.Date, _timeSheet.Lunch, _timeSheet.InTime, _timeSheet.OutTime });
-            pdfLightTable.Rows.Add(new string[] { "22/04/2022", "Yes", "11AM", "4PM" });
-
+          
             //Includes the style to display the header of the light table.
             pdfLightTable.Style.ShowHeader = true;
 

@@ -13,12 +13,13 @@
                 </Entry>
                 <Entry x:Name="supervisiorName" Text="{Binding SupervisiorName}" Placeholder="Supervisior Name" Margin="10,5">
                 </Entry>
-                <Entry x:Name="date" Text="{Binding Date}" Placeholder="Date(11/03/2021)" Margin="10,5">
-                </Entry>
-                <Entry x:Name="timeIn" Text="{Binding TimeIn}" Placeholder="Time IN(10AM)" Margin="10,5">
-                </Entry>
-                <Entry x:Name="timeOut" Text="{Binding TimeOut}" Placeholder="Time Out(5M)" Margin="10,5">
-                </Entry>
+                <DatePicker x:Name="MainDatePicker" MinimumDate="1/1/2018" DateSelected="MainDatePicker_DateSelected" Margin="10,5" />
+                <TimePicker x:Name="InTimePicker" Margin="10,5">
+                    <TimePicker.Format>hh:mm tt</TimePicker.Format>
+                </TimePicker>
+                <TimePicker x:Name="OutTimePicker" Margin="10,5">
+                    <TimePicker.Format>hh:mm tt</TimePicker.Format>
+                </TimePicker>
                 <Entry x:Name="lunch" Text="{Binding Lunch}" Placeholder="Lunch" Margin="10,5">
                 </Entry>
                 <Entry x:Name="comments" Text="{Binding Comments}" Placeholder="Comments" Margin="10,5">
