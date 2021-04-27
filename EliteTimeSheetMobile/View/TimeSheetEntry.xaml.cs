@@ -13,6 +13,10 @@ using EliteTimeSheetMobile.ViewModel;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using SignaturePad.Forms;
+using System.Net.Http;
+using System.Drawing;
+using Android.Graphics;
+using Color = Xamarin.Forms.Color;
 
 namespace EliteTimeSheetMobile.View
 {
@@ -22,6 +26,7 @@ namespace EliteTimeSheetMobile.View
         int SignatureType = 0;
         private ITimeSheetStore _timeSheetStore;
         private TimeSheet _timeSheet;
+        private string date;
         public TimeSheetEntry()
         {
             _timeSheetStore = new SQLiteTimeSheetStore(DependencyService.Get<ISQLiteDb>());
@@ -29,34 +34,45 @@ namespace EliteTimeSheetMobile.View
             SignatureType = 0;
             popupImageView.IsVisible = false;
         }
-        void saveButton_Clicked( object sender,System.EventArgs e)
+        private void MainDatePicker_DateSelected(object sender, DateChangedEventArgs e)
         {
+            date = e.NewDate.ToString("MM-dd-yyyy");
+        }
+        void saveButton_Clicked(object sender, System.EventArgs e)
+        {
+            DateTime Intime = DateTime.Today + InTimePicker.Time;
+            DateTime OutTime = DateTime.Today + OutTimePicker.Time;
+            if (date == null)
+            {
+                date = DateTime.Now.ToString("MM - dd - yyyy");
+            }
+
             TimeSheet timesheet = new TimeSheet()
             {
                 Name = name.Text,
                 Facility = facility.Text,
                 SupervisiorName = supervisiorName.Text,
-                Date=date.Text,
-                InTime= timeIn.Text,
-                OutTime=timeOut.Text,
-                Lunch=lunch.Text,
-                Comments= comments.Text,
-                EmpSignature="Signature",
-                SupSignature="SupSignature"
+                Date = date,
+                InTime = string.Format("{0: hh:mm tt}", Intime),
+                OutTime = string.Format("{0: hh:mm tt}", OutTime),
+                Lunch = lunch.Text,
+                Comments = comments.Text,
+                EmpSignature = "Signature",
+                SupSignature = "SupSignature"
             };
 
             _ = _timeSheetStore.AddTimeSheet(timesheet);
         }
         async void reportButton_Clicked(object sender, System.EventArgs e)
         {
-              var timesheets = await _timeSheetStore.GetTimeSheetAsync();
-              CreatePD(timesheets);
+            var timesheets = await _timeSheetStore.GetTimeSheetAsync();
+            CreatePDAsync(timesheets);
         }
-        private void CreatePD(IEnumerable<TimeSheet> timesheets)
+        private async Task CreatePDAsync(IEnumerable<TimeSheet> timesheets)
         {
             foreach (var timeSheet in timesheets)
             {
-                _timeSheet = timeSheet; 
+                _timeSheet = timeSheet;
             }
 
             PdfDocument doc = new PdfDocument();
@@ -76,7 +92,7 @@ namespace EliteTimeSheetMobile.View
             PdfBitmap image = new PdfBitmap(imageStream);
 
             //Draw the image
-            page.Graphics.DrawImage(image, new PointF(0, 0));
+            page.Graphics.DrawImage(image, new Syncfusion.Drawing.PointF(0, 0));
 
             //create a new PDF string format
             PdfStringFormat drawFormat = new PdfStringFormat();
@@ -88,7 +104,7 @@ namespace EliteTimeSheetMobile.View
             //Create a brush.
             PdfBrush brush = PdfBrushes.Black;
             //bounds
-            RectangleF bounds = new RectangleF(new PointF(50, 60), new SizeF(page.Graphics.ClientSize.Width - 30, page.Graphics.ClientSize.Height - 20));
+            Syncfusion.Drawing.RectangleF bounds = new Syncfusion.Drawing.RectangleF(new Syncfusion.Drawing.PointF(50, 60), new Syncfusion.Drawing.SizeF(page.Graphics.ClientSize.Width - 30, page.Graphics.ClientSize.Height - 20));
             //Create a new text elememt
             PdfTextElement element = new PdfTextElement("Name:", font, brush);
             //Set the string format
@@ -103,7 +119,7 @@ namespace EliteTimeSheetMobile.View
             //Set the string format
             name.StringFormat = drawFormat;
             //Draw the text element
-            name.Draw(result.Page, new RectangleF(result.Bounds.X + 100, result.Bounds.Bottom - 15, result.Bounds.Width, result.Bounds.Height));
+            name.Draw(result.Page, new Syncfusion.Drawing.RectangleF(result.Bounds.X + 100, result.Bounds.Bottom - 15, result.Bounds.Width, result.Bounds.Height));
 
             ///////////////////////////////////////////////////////////////////
 
@@ -111,14 +127,14 @@ namespace EliteTimeSheetMobile.View
             //Set the string format
             element.StringFormat = drawFormat;
             //Draw the text element
-            PdfLayoutResult result1 = element1.Draw(result.Page, new RectangleF(result.Bounds.X, result.Bounds.Bottom, result.Bounds.Width, result.Bounds.Height));
+            PdfLayoutResult result1 = element1.Draw(result.Page, new Syncfusion.Drawing.RectangleF(result.Bounds.X, result.Bounds.Bottom, result.Bounds.Width, result.Bounds.Height));
 
 
             PdfTextElement facility = new PdfTextElement(_timeSheet.Facility, font, brush);
             //Set the string format
             element.StringFormat = drawFormat;
             //Draw the text element
-            facility.Draw(result.Page, new RectangleF(result.Bounds.X + 100, result.Bounds.Bottom, result.Bounds.Width, result.Bounds.Height));
+            facility.Draw(result.Page, new Syncfusion.Drawing.RectangleF(result.Bounds.X + 100, result.Bounds.Bottom, result.Bounds.Width, result.Bounds.Height));
 
             ////////////////////////////////////////////////////////////////////////
 
@@ -134,13 +150,12 @@ namespace EliteTimeSheetMobile.View
             pdfLightTable.Columns.Add(new PdfColumn("Out Time"));
             //Add row        
             pdfLightTable.Rows.Add(new string[] { _timeSheet.Date, _timeSheet.Lunch, _timeSheet.InTime, _timeSheet.OutTime });
-            pdfLightTable.Rows.Add(new string[] { "22/04/2022", "Yes", "11AM", "4PM" });
 
             //Includes the style to display the header of the light table.
             pdfLightTable.Style.ShowHeader = true;
 
             //Draws PdfLightTable and returns the rendered bounds.
-            result = pdfLightTable.Draw(page, new PointF(result.Bounds.Left, result.Bounds.Bottom + 20));
+            result = pdfLightTable.Draw(page, new Syncfusion.Drawing.PointF(result.Bounds.Left, result.Bounds.Bottom + 20));
             //draw string with returned bounds from table
 
             ////  Draw the Signature Title
@@ -154,15 +169,17 @@ namespace EliteTimeSheetMobile.View
             //// Signature image
 
             //Get the images as stream
-            Stream imageStreamSig = typeof(TimeSheetEntry).GetTypeInfo().Assembly.GetManifestResourceStream("EliteTimeSheetMobile.Assets.signature.png");
+            //Stream imageStreamSig = typeof(TimeSheetEntry).GetTypeInfo().Assembly.GetManifestResourceStream("EliteTimeSheetMobile.Assets.signature.png");
+            string path = await DependencyService.Get<ISave>().GetSignaturePath("empsignature.png");
+            Stream imageStreamSig = new FileStream(path, FileMode.Open);
 
             //Draw the image
             //Create a new PdfBitmap instance
             PdfBitmap imageSig = new PdfBitmap(imageStreamSig);
 
             //Draw the image
-            page.Graphics.DrawImage(imageSig, new PointF(result.Bounds.X + 150, result.Bounds.Y));
-
+            //page.Graphics.DrawImage(imageSig, new Syncfusion.Drawing.PointF(result.Bounds.X + 150, result.Bounds.Y));
+            page.Graphics.DrawImage(imageSig, new Syncfusion.Drawing.PointF(result.Bounds.X + 150, result.Bounds.Y), new Syncfusion.Drawing.SizeF(30, 30));
             ////////////////// Supervisior name Title
             PdfTextElement supervisiorTitle = new PdfTextElement("Supervisior Name:", font, brush);
             //Set the string format
@@ -190,12 +207,17 @@ namespace EliteTimeSheetMobile.View
             //////////// Supervisior Signature image
             Stream imageStreamSigSup = typeof(TimeSheetEntry).GetTypeInfo().Assembly.GetManifestResourceStream("EliteTimeSheetMobile.Assets.signature.png");
 
-            //Draw the image
-            //Create a new PdfBitmap instance
-            PdfBitmap imageSigSup = new PdfBitmap(imageStreamSigSup);
+            string supersignpath = await DependencyService.Get<ISave>().GetSignaturePath("supervisorsignature.png");
+            Stream imageStreamSuperVisorSig = new FileStream(supersignpath, FileMode.Open);
 
             //Draw the image
-            page.Graphics.DrawImage(imageSigSup, new PointF(result.Bounds.X + 150, result.Bounds.Y));
+            //Create a new PdfBitmap instance
+            PdfBitmap imageSupervisorSig = new PdfBitmap(imageStreamSuperVisorSig);
+
+            //Draw the image
+            //page.Graphics.DrawImage(imageSig, new Syncfusion.Drawing.PointF(result.Bounds.X + 150, result.Bounds.Y));
+            page.Graphics.DrawImage(imageSupervisorSig, new Syncfusion.Drawing.PointF(result.Bounds.X + 150, result.Bounds.Y), new Syncfusion.Drawing.SizeF(30, 30));
+
 
 
             //draw string with returned bounds from table
@@ -216,6 +238,7 @@ namespace EliteTimeSheetMobile.View
 
         }
 
+        
 
         private void btnPopupButton_Clicked(object sender, EventArgs e)
         {
@@ -272,7 +295,7 @@ namespace EliteTimeSheetMobile.View
             {
 
                 String path;
-                using (var bitmap = await signatureSample.GetImageStreamAsync(SignatureImageFormat.Png, System.Drawing.Color.Black, System.Drawing.Color.White, 1f))
+                using (var bitmap = await signatureSample.GetImageStreamAsync(SignatureImageFormat.Png, Color.Black, Color.White, 1f))
                 {
                     if (SignatureType == 1)
                     {

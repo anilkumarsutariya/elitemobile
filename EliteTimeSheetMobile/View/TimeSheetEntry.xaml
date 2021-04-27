@@ -9,53 +9,51 @@
                     VerticalOptions="FillAndExpand">
         <StackLayout>
             <StackLayout>
-                <Label Text="Time Sheet Entry"
-                       Margin="0,30,0,10"
-                       FontSize="Title"
-                       HorizontalOptions="Center" />
-                <Entry x:Name="name"
-                       Text="{Binding Name}"
-                       Placeholder="Name"
-                       Margin="10,5">
-                </Entry>
-                <Entry x:Name="facility"
-                       Text="{Binding Facility}"
-                       Placeholder="Facility"
-                       Margin="10,5">
-                </Entry>
-                <Entry x:Name="supervisiorName"
-                       Text="{Binding SupervisiorName}"
-                       Placeholder="Supervisior Name"
-                       Margin="10,5">
-                </Entry>
-                <Entry x:Name="date"
-                       Text="{Binding Date}"
-                       Placeholder="Date"
-                       Margin="10,5">
-                </Entry>
-                <Entry x:Name="timeIn"
-                       Text="{Binding TimeIn}"
-                       Placeholder="Time IN"
-                       Margin="10,5">
-                </Entry>
-                <Entry x:Name="timeOut"
-                       Text="{Binding TimeOut}"
-                       Placeholder="Time Out"
-                       Margin="10,5">
-                </Entry>
-                <Entry x:Name="lunch"
-                       Text="{Binding Lunch}"
-                       Placeholder="Lunch"
-                       Margin="10,5">
-                </Entry>
-                <Entry x:Name="comments"
-                       Text="{Binding Comments}"
-                       Placeholder="Comments"
-                       Margin="10,5">
-                </Entry>
+                    <Label Text="Time Sheet Entry"
+                           Margin="0,30,0,10"
+                           FontSize="Title"
+                           HorizontalOptions="Center" />
+                    <Entry x:Name="name"
+                           Text="{Binding Name}"
+                           Placeholder="Name"
+                           Margin="10,5">
+                    </Entry>
+                    <Entry x:Name="facility"
+                           Text="{Binding Facility}"
+                           Placeholder="Facility"
+                           Margin="10,5">
+                    </Entry>
+                    <Entry x:Name="supervisiorName"
+                           Text="{Binding SupervisiorName}"
+                           Placeholder="Supervisior Name"
+                           Margin="10,5">
+                    </Entry>
+                    <DatePicker x:Name="MainDatePicker"
+                                Format="dd/MM/yyyy"
+                                MinimumDate="1/1/2018"
+                                DateSelected="MainDatePicker_DateSelected"
+                                Margin="10,5" />
+                    <TimePicker x:Name="InTimePicker"
+                                Margin="10,5">
+                        <TimePicker.Format>hh:mm tt</TimePicker.Format>
+                    </TimePicker>
+                    <TimePicker x:Name="OutTimePicker"
+                                Margin="10,5">
+                        <TimePicker.Format>hh:mm tt</TimePicker.Format>
+                    </TimePicker>
+                    <Entry x:Name="lunch"
+                           Text="{Binding Lunch}"
+                           Placeholder="Lunch"
+                           Margin="10,5">
+                    </Entry>
+                    <Entry x:Name="comments"
+                           Text="{Binding Comments}"
+                           Placeholder="Comments"
+                           Margin="10,5">
+                    </Entry>
 
 
-                <StackLayout  Orientation="Horizontal"
+                    <StackLayout  Orientation="Horizontal"
                                   Margin="10,0,5,0"
                                   x:Name="lay_sign_preview"
                                   HorizontalOptions="FillAndExpand"
@@ -90,26 +88,37 @@
                             VerticalOptions="Center"
                             Clicked="btnPopupButton_Clicked"
                             BorderColor="Maroon"
-                            BorderWidth="3"
+                            BorderWidth="1.5"
                             Background="#FFFFFF"
                             CornerRadius="10"
                             Text="Employee Signature"></Button>
                     <Button HorizontalOptions="Center"
                             VerticalOptions="Center"
                             BorderColor="Maroon"
-                            BorderWidth="3"
+                            BorderWidth="1.5"
                             Background="#FFFFFF"
                             CornerRadius="10"
                             Clicked="btnPopupSupervisor_Clicked"
                             Text="Supervisor Signature"></Button>
                 </StackLayout>
-
+                    <Button x:Name="reportButton"
+                            Text="Report"
+                            Clicked="reportButton_Clicked"
+                            TextColor="Maroon"
+                            BorderColor="#1F85DE"
+                            BorderWidth="2"
+                            Background="#FFFFFF"
+                            CornerRadius="10"
+                            Margin="30,20,30,0"></Button>
 
                     <Button x:Name="loginButton"
                             Text="Submit"
                             Clicked="saveButton_Clicked"
-                            TextColor="White"
-                            BackgroundColor="DarkRed"
+                            TextColor="Maroon"
+                            BorderColor="#1F85DE"
+                            BorderWidth="2"
+                            Background="#FFFFFF"
+                            CornerRadius="10"
                             Margin="30,30"></Button>
                 </StackLayout>
         </StackLayout>

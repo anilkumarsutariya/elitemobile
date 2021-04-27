@@ -16,6 +16,7 @@ namespace EliteTimeSheetMobile.View
         public HomePage()
         {
             InitializeComponent();
+            NavigationPage.SetHasBackButton(this, false);
         }
         async void timeSheetButton_Clicked(object sender, System.EventArgs e)
         {

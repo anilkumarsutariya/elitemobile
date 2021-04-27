@@ -88,4 +88,11 @@ class SaveAndroid : ISave
         return file;
     }
 
+    public async Task<String> GetSignaturePath(string filename)
+    {
+        var path = Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryPictures).AbsolutePath;
+        var file = Path.Combine(path, filename);
+        return file;
+    }
+
 }

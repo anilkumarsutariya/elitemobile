@@ -10,6 +10,8 @@ namespace EliteTimeSheetMobile
     {
         Task SaveAndView(string filename, string contentType, MemoryStream stream);
         Task<string> SaveSignature(Stream bitmap, string filename);
+        Task<string> GetSignaturePath(string filename);
+        
     }
 }
 

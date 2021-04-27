@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="EliteTimeSheetMobile.View.HomePage">
+             x:Class="EliteTimeSheetMobile.View.HomePage"
+             Title="Elite TimeSheet">
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
@@ -13,7 +14,7 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Button Text="Profile"
-                    Margin="20,60,20,60"
+                    Margin="20,80,20,60"
                     BorderColor="Maroon"
                     BorderWidth="3"
                     Background="#FFFFFF"
@@ -23,8 +24,8 @@
                     VerticalOptions="FillAndExpand" />
 
             <Button Grid.Column="1"
-                Text="TimeSheet"
-                    Margin="20,60,20,60"
+                    Text="TimeSheet"
+                    Margin="20,80,20,60"
                     BorderColor="Maroon"
                     BorderWidth="3"
                     Background="#FFFFFF"
@@ -36,7 +37,7 @@
 
             <Button Grid.Row="1"
                     Text="GENERATE REPORT"
-                    Margin="20,30,20,90"
+                    Margin="20,30,20,120"
                     BorderColor="Maroon"
                     BorderWidth="3"
                     FontAttributes="Bold"
@@ -48,7 +49,7 @@
             <Button Grid.Row="1"
                     Grid.Column="1"
                     Text="SEND REPORT"
-                    Margin="20,30,20,90"
+                    Margin="20,30,20,120"
                     BorderColor="Maroon"
                     FontAttributes="Bold"
                     BorderWidth="3"
