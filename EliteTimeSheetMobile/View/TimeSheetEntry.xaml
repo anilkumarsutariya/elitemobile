@@ -13,7 +13,7 @@
                 </Entry>
                 <Entry x:Name="supervisiorName" Text="{Binding SupervisiorName}" Placeholder="Supervisior Name" Margin="10,5">
                 </Entry>
-                <DatePicker x:Name="MainDatePicker" MinimumDate="1/1/2018" DateSelected="MainDatePicker_DateSelected" Margin="10,5" />
+                <DatePicker x:Name="MainDatePicker" Format="dd/MM/yyyy" MinimumDate="1/1/2018" DateSelected="MainDatePicker_DateSelected" Margin="10,5" />
                 <TimePicker x:Name="InTimePicker" Margin="10,5">
                     <TimePicker.Format>hh:mm tt</TimePicker.Format>
                 </TimePicker>
@@ -24,6 +24,7 @@
                 </Entry>
                 <Entry x:Name="comments" Text="{Binding Comments}" Placeholder="Comments" Margin="10,5">
                 </Entry>
+                <Button x:Name="reportButton" Text="Report" Clicked="reportButton_Clicked" TextColor="White" BackgroundColor="DarkRed" Margin="30,30"></Button>
                 <Button x:Name="loginButton" Text="Submit" Clicked="saveButton_Clicked" TextColor="White" BackgroundColor="DarkRed" Margin="30,30"></Button>
             </StackLayout>
         </StackLayout>

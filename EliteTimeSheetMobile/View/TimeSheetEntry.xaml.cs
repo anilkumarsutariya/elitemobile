@@ -27,18 +27,21 @@ namespace EliteTimeSheetMobile.View
         }
         private void MainDatePicker_DateSelected(object sender, DateChangedEventArgs e)
         {
-              date = e.NewDate.ToLongDateString();
+            date = e.NewDate.ToString("MM-dd-yyyy");
         }
         void saveButton_Clicked( object sender,System.EventArgs e)
         {
+             DateTime Intime = DateTime.Today + InTimePicker.Time;
+             DateTime OutTime = DateTime.Today + OutTimePicker.Time;
+
             TimeSheet timesheet = new TimeSheet()
             {
                 Name = name.Text,
                 Facility = facility.Text,
                 SupervisiorName = supervisiorName.Text,
-                Date=date,
-                InTime= InTimePicker.ToString(),
-                OutTime= OutTimePicker.ToString(),
+                Date = date,
+                InTime = string.Format("{0: hh:mm tt}", Intime),
+                OutTime = string.Format("{0: hh:mm tt}", OutTime),
                 Lunch =lunch.Text,
                 Comments= comments.Text,
                 EmpSignature="Signature",
