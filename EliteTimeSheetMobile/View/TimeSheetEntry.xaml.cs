@@ -33,7 +33,11 @@ namespace EliteTimeSheetMobile.View
         {
              DateTime Intime = DateTime.Today + InTimePicker.Time;
              DateTime OutTime = DateTime.Today + OutTimePicker.Time;
-
+            if (date == null)
+            {
+                 date = DateTime.Now.ToString("MM - dd - yyyy");
+            }
+             
             TimeSheet timesheet = new TimeSheet()
             {
                 Name = name.Text,
