@@ -53,7 +53,7 @@ namespace EliteTimeSheetMobile.View
         }
          void GenerateTimesheet_Clicked(object sender, System.EventArgs e)
         {
-             generatePDF.CreatePDFAsync(timeSheets);
+            _ = generatePDF.CreatePDFAsync(timeSheets);
              timeSheets.Clear();
         }
       }

@@ -64,9 +64,9 @@ namespace EliteTimeSheetMobile.View
                 timeSheetsEntry.Add(timesheet);
         }
 
-        async void reportButton_Clicked(object sender, System.EventArgs e)
+           void reportButton_Clicked(object sender, System.EventArgs e)
         {
-                generatePDF.CreatePDFAsync(timeSheetsEntry);
+            _ = generatePDF.CreatePDFAsync(timeSheetsEntry);
                 timeSheetsEntry.Clear();
         }
         private void btnPopupButton_Clicked(object sender, EventArgs e)
