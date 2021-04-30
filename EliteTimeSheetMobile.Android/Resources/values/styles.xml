@@ -8,5 +8,8 @@
 		<item name="android:windowBackground">@drawable/splash_bg</item>
 		<item name="windowActionBar">false</item>
 		<item name="windowNoTitle">true</item>
+		<item name="android:windowIsTranslucent">false</item>
+		<item name="android:windowIsFloating">false</item>
+		<item name="android:backgroundDimEnabled">true</item>
 	</style>
 </resources>
