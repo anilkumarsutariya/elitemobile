@@ -80,11 +80,11 @@
                     </Image>
                 </StackLayout>
 
-                <StackLayout  Orientation="Horizontal"
+                    <StackLayout  Orientation="Horizontal"
                               HorizontalOptions="CenterAndExpand"
                                   Margin="10,5"
                                   VerticalOptions="CenterAndExpand">
-                    <Button HorizontalOptions="Center"
+                        <Button HorizontalOptions="Center"
                             VerticalOptions="Center"
                             Clicked="btnPopupButton_Clicked"
                             BorderColor="Maroon"
@@ -92,7 +92,7 @@
                             Background="#FFFFFF"
                             CornerRadius="10"
                             Text="Employee Signature"></Button>
-                    <Button HorizontalOptions="Center"
+                        <Button HorizontalOptions="Center"
                             VerticalOptions="Center"
                             BorderColor="Maroon"
                             BorderWidth="1.5"
@@ -100,7 +100,8 @@
                             CornerRadius="10"
                             Clicked="btnPopupSupervisor_Clicked"
                             Text="Supervisor Signature"></Button>
-                </StackLayout>
+                    </StackLayout>
+
                     <Button x:Name="reportButton"
                             Text="Report"
                             Clicked="reportButton_Clicked"
@@ -109,8 +110,7 @@
                             BorderWidth="2"
                             Background="#FFFFFF"
                             CornerRadius="10"
-                            Margin="30,20,30,0"></Button>
-
+                            Margin="30,30"></Button>
                     <Button x:Name="loginButton"
                             Text="Submit"
                             Clicked="saveButton_Clicked"
