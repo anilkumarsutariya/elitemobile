@@ -10,37 +10,6 @@
         <ScrollView>
             <StackLayout>
 
-
-                <ContentView x:Name="popupImageView"
-                             BackgroundColor="#C0808080"
-                             Padding="10, 0"
-                             IsVisible="false"
-                             AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
-                             AbsoluteLayout.LayoutFlags="All">
-                    <StackLayout VerticalOptions="Center"
-                                 HorizontalOptions="Center">
-                        <StackLayout Orientation="Vertical"
-                                     HeightRequest="350"
-                                     WidthRequest="450"
-                                     BackgroundColor="#00FFFFFF">
-                            <Image x:Name="img_Preview_Sign"
-                                   Aspect="AspectFit"
-                                   BackgroundColor="White"
-                                   HeightRequest="250"
-                                   HorizontalOptions="FillAndExpand" />
-
-                            <Button HorizontalOptions="End"
-                                    VerticalOptions="Center"
-                                    BorderColor="#1F85DE"
-                                    BorderWidth="2"
-                                    Background="#FFFFFF"
-                                    CornerRadius="10"
-                                    Clicked="btnImagePopupClose_Clicked"
-                                    Text="Close"></Button>
-                        </StackLayout>
-                    </StackLayout>
-                </ContentView>
-
                 <custom:CustomEntry x:Name="name"
                                     Text="{Binding Name}"
                                     Placeholder="Name"
@@ -57,10 +26,10 @@
                                     WidthRequest="100" />
 
                 <custom:CustomEntry x:Name="facility"
-                    Text="{Binding Facility}"
-                    Placeholder="Facility"
-                    FontSize="16"
-                    Margin="10,5,5,5"
+                                    Text="{Binding Facility}"
+                                    Placeholder="Facility"
+                                    FontSize="16"
+                                    Margin="10,5,5,5"
                                     IsCurvedCornersEnabled="True"
                                     HorizontalTextAlignment="Center"
                                     BorderColor="Gray"
@@ -133,7 +102,7 @@
                                     CornerRadius="16"
                                     WidthRequest="100" />
 
-              
+
                 <StackLayout  Orientation="Horizontal"
                               Margin="10,0,5,0"
                               x:Name="lay_sign_preview"
@@ -161,7 +130,7 @@
                     </Image>
                 </StackLayout>
 
-                    <StackLayout  Orientation="Horizontal"
+                <StackLayout  Orientation="Horizontal"
                               HorizontalOptions="CenterAndExpand"
                               Margin="10,10,5,0"
                               VerticalOptions="CenterAndExpand">
@@ -173,7 +142,7 @@
                             Background="#FFFFFF"
                             CornerRadius="10"
                             Text="Employee Signature"></Button>
-                        <Button HorizontalOptions="Center"
+                    <Button HorizontalOptions="Center"
                             VerticalOptions="Center"
                             BorderColor="Maroon"
                             BorderWidth="1.5"
@@ -203,15 +172,15 @@
                         Background="#FFFFFF"
                         CornerRadius="10"
                         Margin="30,30"></Button>
-                
-                
+
+
             </StackLayout>
-            
+
         </ScrollView>
-        
+
     </StackLayout>
-    
-    
-    
+
+
+
 
 </ContentPage>
