@@ -4,6 +4,8 @@ using Android.App;
 using Android.Content.PM;
 using Android.Runtime;
 using Android.OS;
+using Xamarin.Forms;
+using EliteTimeSheetMobile.View;
 
 namespace EliteTimeSheetMobile.Droid
 {
@@ -13,7 +15,17 @@ namespace EliteTimeSheetMobile.Droid
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+            Rg.Plugins.Popup.Popup.Init(this);
+            MessagingCenter.Subscribe<SignaturePopUp>(this, "allowLandScapePortrait", sender =>
+            {
+                RequestedOrientation = ScreenOrientation.Landscape;
+            });
 
+            //during page close setting back to portrait
+            MessagingCenter.Subscribe<SignaturePopUp>(this, "preventLandScape", sender =>
+            {
+                RequestedOrientation = ScreenOrientation.Portrait;
+            });
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());

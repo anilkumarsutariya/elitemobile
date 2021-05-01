@@ -3,8 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EliteTimeSheetMobile.View.HomePage"
              Title="Elite TimeSheet">
-    <ContentPage.Content>
-        <Grid>
+    <ContentPage.Content Background="#696969">
+        <Grid >
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
@@ -16,7 +16,7 @@
             <Button Text="Profile"
                     Margin="20,80,20,60"
                     BorderColor="Maroon"
-                    BorderWidth="3"
+                    BorderWidth="2"
                     Background="#FFFFFF"
                     CornerRadius="20"
                     FontAttributes="Bold"
@@ -27,7 +27,7 @@
                     Text="TimeSheet"
                     Margin="20,80,20,60"
                     BorderColor="Maroon"
-                    BorderWidth="3"
+                    BorderWidth="2"
                     Background="#FFFFFF"
                     CornerRadius="20"
                     FontAttributes="Bold"
@@ -39,7 +39,7 @@
                     Text="GENERATE REPORT"
                     Margin="20,30,20,120"
                     BorderColor="Maroon"
-                    BorderWidth="3"
+                    BorderWidth="2"
                     FontAttributes="Bold"
                     Background="#FFFFFF"
                     CornerRadius="20"
@@ -52,7 +52,7 @@
                     Margin="20,30,20,120"
                     BorderColor="Maroon"
                     FontAttributes="Bold"
-                    BorderWidth="3"
+                    BorderWidth="2"
                     Background="#FFFFFF"
                     CornerRadius="20"
                     HorizontalOptions="FillAndExpand"

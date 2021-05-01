@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 x:Class="EliteTimeSheetMobile.View.SignaturePopUp"
+                 xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+                 xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+                 xmlns:controls="clr-namespace:SignaturePad.Forms;assembly=SignaturePad.Forms"
+                 BackgroundColor="WhiteSmoke">
+    <pages:PopupPage.Animation>
+        <animations:ScaleAnimation PositionIn="Center"
+                                   PositionOut="Center"
+                                   ScaleIn="1.2"
+                                   ScaleOut="0.8"
+                                   DurationIn="400"
+                                   DurationOut="300"
+                                   EasingIn="SinOut"
+                                   EasingOut="SinIn"
+                                   HasBackgroundAnimation="False" />
+    </pages:PopupPage.Animation>
+    <StackLayout VerticalOptions="Center"
+                 HorizontalOptions="Center">
+        <StackLayout Orientation="Vertical"
+                     HeightRequest="350"
+                     WidthRequest="450">
+            <controls:SignaturePadView x:Name="signatureSample"
+                                       StrokeColor="Black"
+                                       StrokeWidth="5"
+                                       CaptionText="Employee Signature"
+                                       CaptionTextColor="#000000"
+                                       CaptionFontSize="16"
+                                       HeightRequest="250"
+                                       BackgroundColor="WhiteSmoke" />
+            <AbsoluteLayout HorizontalOptions="FillAndExpand">
+
+                <StackLayout Orientation="Horizontal"
+                             AbsoluteLayout.LayoutBounds="0,0,1,1"
+                             VerticalOptions="Center"
+                             HorizontalOptions="Center"
+                             Margin="0,10"
+                             AbsoluteLayout.LayoutFlags="All">
+                    <Button HorizontalOptions="End"
+                            VerticalOptions="Center"
+                            BorderColor="#1F85DE"
+                            BorderWidth="2"
+                            Background="#FFFFFF"
+                            Clicked="btnImagePopupSave_Clicked"
+                            CornerRadius="10"
+                            Text="Save"></Button>
+                    <Button HorizontalOptions="End"
+                            VerticalOptions="Center"
+                            BorderColor="#1F85DE"
+                            Clicked="btnImagePopupClose_Clicked"
+                            BorderWidth="2"
+                            Background="#FFFFFF"
+                            CornerRadius="10"
+                            Text="Close"></Button>
+                </StackLayout>
+            </AbsoluteLayout>
+        </StackLayout>
+    </StackLayout>
+</pages:PopupPage>  

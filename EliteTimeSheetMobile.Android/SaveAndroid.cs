@@ -69,6 +69,10 @@ class SaveAndroid : ISave
 
     public async Task<String> SaveSignature(Stream bitmap, string filename)
     {
+        if (ContextCompat.CheckSelfPermission(Forms.Context, Manifest.Permission.WriteExternalStorage) != Permission.Granted)
+        {
+            ActivityCompat.RequestPermissions((Android.App.Activity)Forms.Context, new String[] { Manifest.Permission.WriteExternalStorage }, 1);
+        }
         var path = Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryPictures).AbsolutePath;
         var file = Path.Combine(path, filename);
         try

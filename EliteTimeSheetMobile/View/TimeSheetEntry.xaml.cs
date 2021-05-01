@@ -17,28 +17,38 @@ using System.Net.Http;
 using System.Drawing;
 using Android.Graphics;
 using Color = Xamarin.Forms.Color;
+using Rg.Plugins.Popup.Services;
 
 namespace EliteTimeSheetMobile.View
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class TimeSheetEntry : ContentPage
+    public partial class TimeSheetEntry : ContentPage, TimeSheetEntry.ISaveImageDetails
     {
         int SignatureType = 0;
         private ITimeSheetStore _timeSheetStore;
         private TimeSheet _timeSheet;
         private string date;
+        private string emp_signature_name = "";
+        private string supervisor_signature_name = "";
         public TimeSheetEntry()
         {
             _timeSheetStore = new SQLiteTimeSheetStore(DependencyService.Get<ISQLiteDb>());
             InitializeComponent();
             SignatureType = 0;
             popupImageView.IsVisible = false;
+            lay_sign_preview.IsVisible = false;
         }
         private void MainDatePicker_DateSelected(object sender, DateChangedEventArgs e)
         {
             date = e.NewDate.ToString("MM-dd-yyyy");
         }
-        void saveButton_Clicked(object sender, System.EventArgs e)
+        async void saveButton_Clicked(object sender, System.EventArgs e)
+        {
+            SaveDate();
+            _ = await Navigation.PopAsync(true);
+        }
+
+        private void SaveDate()
         {
             DateTime Intime = DateTime.Today + InTimePicker.Time;
             DateTime OutTime = DateTime.Today + OutTimePicker.Time;
@@ -57,14 +67,16 @@ namespace EliteTimeSheetMobile.View
                 OutTime = string.Format("{0: hh:mm tt}", OutTime),
                 Lunch = lunch.Text,
                 Comments = comments.Text,
-                EmpSignature = "Signature",
-                SupSignature = "SupSignature"
+                EmpSignature = emp_signature_name,
+                SupSignature = supervisor_signature_name
             };
 
             _ = _timeSheetStore.AddTimeSheet(timesheet);
         }
+
         async void reportButton_Clicked(object sender, System.EventArgs e)
         {
+            SaveDate();
             var timesheets = await _timeSheetStore.GetTimeSheetAsync();
             CreatePDAsync(timesheets);
         }
@@ -170,7 +182,7 @@ namespace EliteTimeSheetMobile.View
 
             //Get the images as stream
             //Stream imageStreamSig = typeof(TimeSheetEntry).GetTypeInfo().Assembly.GetManifestResourceStream("EliteTimeSheetMobile.Assets.signature.png");
-            string path = await DependencyService.Get<ISave>().GetSignaturePath("empsignature.png");
+            string path = await DependencyService.Get<ISave>().GetSignaturePath(emp_signature_name);
             Stream imageStreamSig = new FileStream(path, FileMode.Open);
 
             //Draw the image
@@ -185,7 +197,7 @@ namespace EliteTimeSheetMobile.View
             //Set the string format
             supervisiorTitle.StringFormat = drawFormat;
 
-            result = supervisiorTitle.Draw(result.Page, result.Bounds.X, result.Bounds.Bottom + 10);
+            result = supervisiorTitle.Draw(result.Page, result.Bounds.X, result.Bounds.Bottom + 30);
 
             ///// Supervisior name
 
@@ -207,7 +219,7 @@ namespace EliteTimeSheetMobile.View
             //////////// Supervisior Signature image
             Stream imageStreamSigSup = typeof(TimeSheetEntry).GetTypeInfo().Assembly.GetManifestResourceStream("EliteTimeSheetMobile.Assets.signature.png");
 
-            string supersignpath = await DependencyService.Get<ISave>().GetSignaturePath("supervisorsignature.png");
+            string supersignpath = await DependencyService.Get<ISave>().GetSignaturePath(supervisor_signature_name);
             Stream imageStreamSuperVisorSig = new FileStream(supersignpath, FileMode.Open);
 
             //Draw the image
@@ -225,7 +237,7 @@ namespace EliteTimeSheetMobile.View
             PdfTextElement commnets = new PdfTextElement("Commnets:", font, brush);
             //Set the string format
             commnets.StringFormat = drawFormat;
-            commnets.Draw(result.Page, result.Bounds.X, result.Bounds.Bottom + 10);
+            commnets.Draw(result.Page, result.Bounds.X, result.Bounds.Bottom + 30);
 
             MemoryStream stream = new MemoryStream();
             //Saves the document.
@@ -238,37 +250,23 @@ namespace EliteTimeSheetMobile.View
 
         }
 
-        
 
-        private void btnPopupButton_Clicked(object sender, EventArgs e)
+
+        private async void btnPopupButton_Clicked(object sender, EventArgs e)
         {
-            popupSignatureView.IsVisible = true;
-            signatureSample.CaptionText = "Employee Signature";
-            signatureSample.Clear();
+            await PopupNavigation.PushAsync(new SignaturePopUp(1, this));
+           
             SignatureType = 1;
 
         }
 
-        private void btnPopupSupervisor_Clicked(object sender, EventArgs e)
+        private async void btnPopupSupervisor_Clicked(object sender, EventArgs e)
         {
-            popupSignatureView.IsVisible = true;
-            signatureSample.CaptionText = "Supervisor Signature";
-            signatureSample.Clear();
+            await PopupNavigation.PushAsync(new SignaturePopUp(2, this));
+            
             SignatureType = 2;
         }
-        private void btnPopupClose_Clicked(object sender, EventArgs e)
-        {
-            popupSignatureView.IsVisible = false;
-
-
-        }
-        private void btnPopupSave_Clicked(object sender, EventArgs e)
-        {
-
-            popupSignatureView.IsVisible = false;
-            _ = NewMethod();
-
-        }
+      
 
         private void btnImagePopupClose_Clicked(object sender, EventArgs e)
         {
@@ -289,47 +287,31 @@ namespace EliteTimeSheetMobile.View
         }
 
 
-        private async Task NewMethod()
+
+        public void GetSignaturePath(int SignatureType, string SignaturePath, string SignatureName)
         {
-            try
+            if (SignaturePath.Trim().Length > 0)
             {
-
-                String path;
-                using (var bitmap = await signatureSample.GetImageStreamAsync(SignatureImageFormat.Png, Color.Black, Color.White, 1f))
+                if (SignatureType == 1)
                 {
-                    if (SignatureType == 1)
-                    {
-                        path = await DependencyService.Get<ISave>().SaveSignature(bitmap, "empsignature.png");
-                    }
-                    else
-                    {
-                        path = await DependencyService.Get<ISave>().SaveSignature(bitmap, "supervisorsignature.png");
-                    }
-
-                }
-
-                if (path.Trim().Length > 0)
-                {
-                    if (SignatureType == 1)
-                    {
-                        img_Employee_Sign.Source = ImageSource.FromFile(path);
-                    }
-                    else
-                    {
-                        img_Supervisior_Sign.Source = ImageSource.FromFile(path);
-                    }
-
-                    //await DisplayAlert("Signature Pad", "Raster signature saved to the photo library.", "OK");
+                    lay_sign_preview.IsVisible = true;
+                    img_Employee_Sign.Source = ImageSource.FromFile(SignaturePath);
+                    emp_signature_name = SignatureName;
                 }
                 else
-                    await DisplayAlert("Signature Pad", "There was an error saving the signature.", "OK");
-            }
-            catch (Exception ex)
-            {
-                await DisplayAlert("Signature Pad", "There was an error saving the signature.", "OK");
+                {
+                    lay_sign_preview.IsVisible = true;
+                    img_Supervisior_Sign.Source = ImageSource.FromFile(SignaturePath);
+                    supervisor_signature_name = SignatureName;
+                }
 
-                ex.ToString();
+                //await DisplayAlert("Signature Pad", "Raster signature saved to the photo library.", "OK");
             }
+        }
+
+        public interface ISaveImageDetails
+        {
+            void GetSignaturePath(int SignatureType, String SignaturePath, String SignatureName);
 
         }
 
