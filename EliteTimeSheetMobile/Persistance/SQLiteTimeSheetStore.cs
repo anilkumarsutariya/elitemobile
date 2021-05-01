@@ -16,9 +16,9 @@ namespace EliteTimeSheetMobile.Persistance
             _connection.CreateTableAsync<TimeSheet>();
         }
         public async Task<IEnumerable<TimeSheet>> GetTimeSheetAsync()
-
+            
         {
-            return await _connection.Table<TimeSheet>().ToListAsync(); ;
+            return await _connection.Table<TimeSheet>().ToListAsync() ;
         }
         public async Task AddTimeSheet(TimeSheet timeSheet)
         {

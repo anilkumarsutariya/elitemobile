@@ -27,15 +27,12 @@
   <ItemGroup>
     <PackageReference Include="Rg.Plugins.Popup" Version="2.0.0.11" />
     <PackageReference Include="sqlite-net-pcl" Version="1.7.335" />
-    <PackageReference Include="Syncfusion.Xamarin.Compression" Version="19.1.0.57" />
-    <PackageReference Include="Syncfusion.Xamarin.Pdf" Version="19.1.0.57" />
+    <PackageReference Include="Syncfusion.Xamarin.Compression" Version="19.1.0.58" />
+    <PackageReference Include="Syncfusion.Xamarin.Pdf" Version="19.1.0.58" />
     <PackageReference Include="Xamarin.Controls.SignaturePad.Forms" Version="3.0.0" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
     <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Services\" />
+    <PackageReference Include="Xamarin.Forms.InputKit" Version="3.7.2" />
   </ItemGroup>
 
   <ItemGroup>
@@ -58,6 +55,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="View\TimeSheetEntry.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="View\TimeSheetList.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

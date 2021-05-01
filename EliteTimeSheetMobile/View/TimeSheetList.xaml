@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EliteTimeSheetMobile.View.TimeSheetList"
+             xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="timesheet.png"  Text="New TimesSheet"
+            Clicked="NewTimeSheet_Clicked"/>
+        <ToolbarItem Icon="report_pdf.png"  Text="Report"
+            Clicked="GenerateTimesheet_Clicked"/>
+    </ContentPage.ToolbarItems>
+    
+
+    <ContentPage.Content>
+        <ListView x:Name="timesheetListView" RowHeight = "105">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Vertical">
+                            <Label Text="{Binding SupervisiorName}" TextColor="Brown" Margin="10,5,0,0"></Label>
+                            <Label Text="{Binding Date}" TextColor="Chocolate" Margin="10,0,0,0"></Label>
+                            <StackLayout Orientation="Horizontal">
+                                <Image Source="duration.png" />
+                                <Label Text="{Binding InTime}" TextColor="Maroon"></Label>
+                                <Label Text="-" TextColor="Black"></Label>
+                                <Label Text="{Binding OutTime}" TextColor="Maroon"></Label>
+                                <CheckBox Color="Maroon"  CheckedChanged="OnCheckBoxCheckedChanged"  Margin="100,-10,0,0" BindingContext="{Binding .} " />
+                            </StackLayout>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </ContentPage.Content>
+</ContentPage>
