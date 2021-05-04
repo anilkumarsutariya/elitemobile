@@ -29,6 +29,14 @@ namespace EliteTimeSheetMobile.View
         {
             var timesheets = await _timeSheetStore.GetTimeSheetAsync();
             timesheetListView.ItemsSource = timesheets.Reverse();
+            if (timeSheets.Count > 0)
+            {
+                report_gen_icon.IsEnabled = true;
+            }
+            else
+            {
+                report_gen_icon.IsEnabled = false;
+            }
             base.OnAppearing();
         }
         private void OnCheckBoxCheckedChanged(object sender, CheckedChangedEventArgs e)
@@ -43,6 +51,14 @@ namespace EliteTimeSheetMobile.View
             {
                 var selectedTimeSheet = checkbox.BindingContext as TimeSheet;
                 timeSheets.Remove(selectedTimeSheet);
+            }
+            if (timeSheets.Count > 0)
+            {
+                report_gen_icon.IsEnabled = true;
+            }
+            else
+            {
+                report_gen_icon.IsEnabled = false;
             }
         }
         async void NewTimeSheet_Clicked(object sender, System.EventArgs e)

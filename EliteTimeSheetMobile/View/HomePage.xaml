@@ -2,7 +2,9 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EliteTimeSheetMobile.View.HomePage"
-             Title="Elite TimeSheet">
+             Title="    Elite TimeSheet">
+    
+
     <ContentPage.Content Background="#696969">
         <Grid >
             <Grid.RowDefinitions>
@@ -15,9 +17,12 @@
             </Grid.ColumnDefinitions>
             <Button Text="Profile"
                     Margin="20,80,20,60"
-                    BorderColor="Maroon"
+                    BorderColor="#3F51B5"
                     BorderWidth="2"
                     Background="#FFFFFF"
+                    Padding="20,50"
+                    ContentLayout="Top,0"
+                    ImageSource="ic_person_profile_46dp.png"
                     CornerRadius="20"
                     FontAttributes="Bold"
                     HorizontalOptions="FillAndExpand"
@@ -26,7 +31,10 @@
             <Button Grid.Column="1"
                     Text="TimeSheet"
                     Margin="20,80,20,60"
-                    BorderColor="Maroon"
+                    BorderColor="#3F51B5"
+                    Padding="20,50"
+                    ContentLayout="Top,0"
+                    ImageSource="ic_timesheet_46dp.png"
                     BorderWidth="2"
                     Background="#FFFFFF"
                     CornerRadius="20"
@@ -38,7 +46,10 @@
             <Button Grid.Row="1"
                     Text="GENERATE REPORT"
                     Margin="20,30,20,120"
-                    BorderColor="Maroon"
+                    BorderColor="#3F51B5"
+                    Padding="20,50"
+                    ContentLayout="Top,0"
+                    ImageSource="ic_generate_report_46dp.png"
                     BorderWidth="2"
                     FontAttributes="Bold"
                     Background="#FFFFFF"
@@ -52,7 +63,10 @@
                     Grid.Column="1"
                     Text="SEND REPORT"
                     Margin="20,30,20,120"
-                    BorderColor="Maroon"
+                    BorderColor="#3F51B5"
+                    Padding="20,50"
+                    ContentLayout="Top,0"
+                    ImageSource="ic_send_report_46dp.png"
                     FontAttributes="Bold"
                     BorderWidth="2"
                     Background="#FFFFFF"

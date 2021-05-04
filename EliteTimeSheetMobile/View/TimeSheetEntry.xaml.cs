@@ -31,11 +31,11 @@ namespace EliteTimeSheetMobile.View
             _timeSheetStore = new SQLiteTimeSheetStore(DependencyService.Get<ISQLiteDb>());
             InitializeComponent();
             SignatureType = 0;
-            popupImageView.IsVisible = false;
             lay_sign_preview.IsVisible = false;
              timeSheetsEntry = new List<TimeSheet>();
              generatePDF = new GeneratePDF();
-           
+            MainDatePicker.SetValue(DatePicker.MaximumDateProperty, DateTime.Now);
+
         }
         private void MainDatePicker_DateSelected(object sender, DateChangedEventArgs e)
         {
@@ -47,7 +47,7 @@ namespace EliteTimeSheetMobile.View
             _ = await Navigation.PopAsync(true);
         }
 
-        private void SaveDate()
+        private TimeSheet SaveDate()
         {
             DateTime Intime = DateTime.Today + InTimePicker.Time;
             DateTime OutTime = DateTime.Today + OutTimePicker.Time;
@@ -72,11 +72,14 @@ namespace EliteTimeSheetMobile.View
 
             _ = _timeSheetStore.AddTimeSheet(timesheet);
 
-                timeSheetsEntry.Add(timesheet);
+              return timesheet;
         }
 
            void reportButton_Clicked(object sender, System.EventArgs e)
         {
+            TimeSheet timesheet = SaveDate();
+            timeSheetsEntry.Clear();
+            timeSheetsEntry.Add(timesheet);
             _ = generatePDF.CreatePDFAsync(timeSheetsEntry);
                 timeSheetsEntry.Clear();
         }
@@ -107,6 +110,7 @@ namespace EliteTimeSheetMobile.View
             img_Preview_Sign.Source = img_Employee_Sign.Source;
 
         }
+        
         private void OnSupervisior_SignTapped(object sender, EventArgs e)
         {
             popupImageView.IsVisible = true;

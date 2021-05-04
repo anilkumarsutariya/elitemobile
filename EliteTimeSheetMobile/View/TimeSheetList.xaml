@@ -2,35 +2,75 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EliteTimeSheetMobile.View.TimeSheetList"
+             Title="Generate Report"
              xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Icon="timesheet.png"  Text="New TimesSheet"
+        <ToolbarItem Icon="ic_add_timesheet_48_8dp.png"  Text="New TimesSheet"
             Clicked="NewTimeSheet_Clicked"/>
-        <ToolbarItem Icon="report_pdf.png"  Text="Report"
+        <ToolbarItem x:Name="report_gen_icon"
+                     Icon="ic_export_report_48_8dp.png"  Text="Report"
             Clicked="GenerateTimesheet_Clicked"/>
     </ContentPage.ToolbarItems>
     
 
     <ContentPage.Content>
-        <ListView x:Name="timesheetListView" RowHeight = "105">
+        <ListView x:Name="timesheetListView" RowHeight="115" >
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <StackLayout Orientation="Vertical">
-                            <Label Text="{Binding SupervisiorName}" TextColor="Brown" Margin="10,5,0,0"></Label>
-                            <Label Text="{Binding Date}" TextColor="Chocolate" Margin="10,0,0,0"></Label>
-                            <StackLayout Orientation="Horizontal">
-                                <Image Source="duration.png" />
-                                <Label Text="{Binding InTime}" TextColor="Maroon"></Label>
-                                <Label Text="-" TextColor="Black"></Label>
-                                <Label Text="{Binding OutTime}" TextColor="Maroon"></Label>
-                                <CheckBox Color="Maroon"  CheckedChanged="OnCheckBoxCheckedChanged"  Margin="100,-10,0,0" BindingContext="{Binding .} " />
+                        <StackLayout Orientation="Horizontal"
+                                     Padding="20,20" >
+
+                            <StackLayout Orientation="Vertical">
+                                <Label Text="{Binding SupervisiorName}"
+                                       TextColor="#000000"
+                                       Padding="8,0,8,0"
+                                       FontSize="Medium"
+                                       FontAttributes="Bold"></Label>
+                                <Label Text="{Binding Date}"
+                                       TextColor="Black"
+                                       Padding="8,0,8,0"
+                                       FontSize="Small"></Label>
+                                <StackLayout Orientation="Horizontal"
+                                             VerticalOptions="Center"
+                                             HorizontalOptions="Center">
+                                    <Image Source="ic_time_32_8dp.png"
+                                           VerticalOptions="Center"
+                                           HorizontalOptions="Center" />
+                                    <Label Text="{Binding InTime}"
+                                           TextColor="#90000000"
+                                           VerticalOptions="Center"
+                                           FontAttributes="Bold"
+                                           HorizontalOptions="Center"></Label>
+                                    <Label Text="-"
+                                           TextColor="#90000000"
+                                           VerticalOptions="Center"
+                                           FontAttributes="Bold"
+                                           HorizontalOptions="Center"></Label>
+                                    <Label Text="{Binding OutTime}"
+                                           TextColor="#90000000"
+                                           FontAttributes="Bold"
+                                           VerticalOptions="Center"
+                                           HorizontalOptions="Center"></Label>
+                                    
+                                </StackLayout>
+                            </StackLayout>
+
+                            <StackLayout Orientation="Vertical"
+                                         Padding="20,20">
+                                <CheckBox Color="#FF4081"
+                                          CheckedChanged="OnCheckBoxCheckedChanged"
+                                          Margin="100,0,0,0"
+                                          BindingContext="{Binding .} " />
                             </StackLayout>
                         </StackLayout>
+                       
+                        
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        
     </ContentPage.Content>
 </ContentPage>

@@ -127,7 +127,7 @@ namespace EliteTimeSheetMobile.Helper
 
             //Get the images as stream
             //Stream imageStreamSig = typeof(TimeSheetEntry).GetTypeInfo().Assembly.GetManifestResourceStream("EliteTimeSheetMobile.Assets.signature.png");
-            string path = await DependencyService.Get<ISave>().GetSignaturePath("empsignature.png");
+            string path = await DependencyService.Get<ISave>().GetSignaturePath(_timeSheet.EmpSignature);
             Stream imageStreamSig = new FileStream(path, FileMode.Open);
 
             //Draw the image
@@ -142,7 +142,7 @@ namespace EliteTimeSheetMobile.Helper
             //Set the string format
             supervisiorTitle.StringFormat = drawFormat;
 
-            result = supervisiorTitle.Draw(result.Page, result.Bounds.X, result.Bounds.Bottom + 10);
+            result = supervisiorTitle.Draw(result.Page, result.Bounds.X, result.Bounds.Bottom + 25);
 
             ///// Supervisior name
 
@@ -164,7 +164,7 @@ namespace EliteTimeSheetMobile.Helper
             //////////// Supervisior Signature image
             // Stream imageStreamSigSup = typeof(TimeSheetEntry).GetTypeInfo().Assembly.GetManifestResourceStream("EliteTimeSheetMobile.Assets.signature.png");
 
-            string supersignpath = await DependencyService.Get<ISave>().GetSignaturePath("supervisorsignature.png");
+            string supersignpath = await DependencyService.Get<ISave>().GetSignaturePath(_timeSheet.SupSignature);
             Stream imageStreamSuperVisorSig = new FileStream(supersignpath, FileMode.Open);
 
             //Draw the image
@@ -182,7 +182,16 @@ namespace EliteTimeSheetMobile.Helper
             PdfTextElement commnets = new PdfTextElement("Commnets:", font, brush);
             //Set the string format
             commnets.StringFormat = drawFormat;
-            commnets.Draw(result.Page, result.Bounds.X, result.Bounds.Bottom + 10);
+            result = commnets.Draw(result.Page, result.Bounds.X, result.Bounds.Bottom + 25);
+
+
+            /////Comments
+
+            PdfTextElement CommentsText = new PdfTextElement(_timeSheet.Comments, font, brush);
+            //Set the string format
+            commnets.StringFormat = drawFormat;
+
+            result = CommentsText.Draw(result.Page, result.Bounds.X + 130, result.Bounds.Bottom - 15);
 
             MemoryStream stream = new MemoryStream();
             //Saves the document.

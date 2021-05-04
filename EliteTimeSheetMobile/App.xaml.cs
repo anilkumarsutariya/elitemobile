@@ -10,7 +10,12 @@ namespace EliteTimeSheetMobile
         public App()
         {
             InitializeComponent();
-            MainPage = new NavigationPage(new Login());
+            MainPage = new NavigationPage(new Login())
+            {
+                BarBackgroundColor = Color.FromHex("#3F51B5"),
+                BarTextColor = Color.White
+             
+            };
             //MainPage = new TimeSheetEntry();
         }
 
