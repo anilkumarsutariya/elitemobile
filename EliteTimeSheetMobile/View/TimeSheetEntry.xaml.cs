@@ -43,11 +43,18 @@ namespace EliteTimeSheetMobile.View
         }
         async void saveButton_Clicked(object sender, System.EventArgs e)
         {
-            SaveDate();
-            _ = await Navigation.PopAsync(true);
+             if (SaveData() == null)
+            {
+                _ = DisplayAlert("Alert", "Please Fill All the Filelds.", "OK");
+            }
+            else
+            {
+               _ = await Navigation.PopAsync(true);
+
+            }
         }
 
-        private TimeSheet SaveDate()
+        private TimeSheet SaveData()
         {
             DateTime Intime = DateTime.Today + InTimePicker.Time;
             DateTime OutTime = DateTime.Today + OutTimePicker.Time;
@@ -70,14 +77,24 @@ namespace EliteTimeSheetMobile.View
                 SupSignature = supervisor_signature_name
             };
 
-            _ = _timeSheetStore.AddTimeSheet(timesheet);
+            if (!string.IsNullOrWhiteSpace(name.Text) && !string.IsNullOrWhiteSpace(facility.Text) && 
+                !string.IsNullOrWhiteSpace(date) && !string.IsNullOrWhiteSpace(Intime.ToString()) && !string.IsNullOrWhiteSpace(OutTime.ToString())
+                && !string.IsNullOrWhiteSpace(lunch.Text) && !string.IsNullOrWhiteSpace(comments.Text) && 
+                !string.IsNullOrWhiteSpace(emp_signature_name) && !string.IsNullOrWhiteSpace(supervisor_signature_name))
+            {
+                _ = _timeSheetStore.AddTimeSheet(timesheet);
 
-              return timesheet;
+                   return timesheet;
+            }
+            else
+            {
+                 return null;
+            }
         }
 
            void reportButton_Clicked(object sender, System.EventArgs e)
         {
-            TimeSheet timesheet = SaveDate();
+            TimeSheet timesheet = SaveData();
             timeSheetsEntry.Clear();
             timeSheetsEntry.Add(timesheet);
             _ = generatePDF.CreatePDFAsync(timeSheetsEntry);
