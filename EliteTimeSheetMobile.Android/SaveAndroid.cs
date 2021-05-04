@@ -10,6 +10,8 @@ using Android.Support.V4.App;
 using EliteTimeSheetMobile;
 using AndroidX.Core.Content;
 using AndroidX.Core.App;
+using Android.App;
+using EliteTimeSheetMobile.Droid;
 
 [assembly: Dependency(typeof(SaveAndroid))]
 
@@ -52,8 +54,23 @@ class SaveAndroid : ISave
         }
         catch (Exception e)
         {
+            TaskCompletionSource<bool> taskCompletionSource;
+            taskCompletionSource = new TaskCompletionSource<bool>();
+
+            Android.App.AlertDialog.Builder dialog = new AlertDialog.Builder(Forms.Context);
+            AlertDialog alert = dialog.Create();
+            alert.SetTitle("Alert");
+            alert.SetMessage("Please give file acess permission. ");
+            alert.SetButton("OK", (c, ev) =>
+            {
+                Xamarin.Forms.Forms.Context.StartActivity(new Android.Content.Intent(Android.Provider.Settings.ActionManageAllFilesAccessPermission));
+                taskCompletionSource.SetResult(true);
+            });
+          
+            alert.Show();
             exception = e.ToString();
-        }
+       
+    }
         if (file.Exists() && contentType != "application/html")
         {
             string extension = Android.Webkit.MimeTypeMap.GetFileExtensionFromUrl(Android.Net.Uri.FromFile(file).ToString());
@@ -87,8 +104,6 @@ class SaveAndroid : ISave
             ex.ToString();
             file = "";
         }
-
-
         return file;
     }
 
