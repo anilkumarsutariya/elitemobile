@@ -6,6 +6,9 @@ using Android.Runtime;
 using Android.OS;
 using Xamarin.Forms;
 using EliteTimeSheetMobile.View;
+using AndroidX.Core.Content;
+using Android;
+using AndroidX.Core.App;
 
 namespace EliteTimeSheetMobile.Droid
 {
@@ -31,6 +34,10 @@ namespace EliteTimeSheetMobile.Droid
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());
             Window.SetStatusBarColor(Android.Graphics.Color.Argb(255, 63, 81, 181));
+            if (ContextCompat.CheckSelfPermission(Forms.Context, Manifest.Permission.WriteExternalStorage) != Permission.Granted)
+            {
+                ActivityCompat.RequestPermissions((Android.App.Activity)Forms.Context, new String[] { Manifest.Permission.WriteExternalStorage }, 1);
+            }
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {

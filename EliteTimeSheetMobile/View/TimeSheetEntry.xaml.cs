@@ -35,6 +35,11 @@ namespace EliteTimeSheetMobile.View
              timeSheetsEntry = new List<TimeSheet>();
              generatePDF = new GeneratePDF();
             MainDatePicker.SetValue(DatePicker.MaximumDateProperty, DateTime.Now);
+            if (Application.Current.Properties.ContainsKey("username"))
+            {
+                var username = Application.Current.Properties["username"] as string;
+                name.Text = username;
+            }
 
         }
         private void MainDatePicker_DateSelected(object sender, DateChangedEventArgs e)

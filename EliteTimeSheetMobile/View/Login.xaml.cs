@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Android.Content;
+using Android.Preferences;
 using EliteTimeSheetMobile.Persistance;
 using EliteTimeSheetMobile.ViewModel;
 using Xamarin.Forms;
@@ -24,6 +26,9 @@ namespace EliteTimeSheetMobile.View
 
         async void loginButton_Clicked(object sender, System.EventArgs e)
         {
+            Application.Current.Properties["username"] = userName.Text;
+
+           
             var pageService = new PageService();
             await Navigation.PushAsync(new HomePage());
             //await pageService.PushAsync(new HomePage());

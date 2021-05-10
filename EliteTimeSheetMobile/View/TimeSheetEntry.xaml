@@ -10,182 +10,184 @@
     <StackLayout>
         <ScrollView>
             <AbsoluteLayout Padding="10,10">
-            <StackLayout>
 
-                <custom:CustomEntry x:Name="name"
-                                    Text="{Binding Name}"
-                                    Placeholder="Name"
-                                    FontSize="16"
-                                    Margin="10,20,5,5"
-                                    IsCurvedCornersEnabled="True"
-                                    HorizontalTextAlignment="Center"
-                                    BorderColor="Gray"
-                                    BorderWidth="2"
-                                    PlaceholderColor="Gray"
-                                    TextColor="Black"
-                                    BackgroundColor="White"
-                                    CornerRadius="16"
-                                    WidthRequest="100" />
 
-                <custom:CustomEntry x:Name="facility"
-                                    Text="{Binding Facility}"
-                                    Placeholder="Facility"
-                                    FontSize="16"
-                                    Margin="10,5,5,5"
-                                    IsCurvedCornersEnabled="True"
-                                    HorizontalTextAlignment="Center"
-                                    BorderColor="Gray"
-                                    BorderWidth="2"
-                                    PlaceholderColor="Gray"
-                                    TextColor="Black"
-                                    BackgroundColor="White"
-                                    CornerRadius="16"
-                                    WidthRequest="100" />
+                <StackLayout>
 
-                <custom:CustomEntry x:Name="supervisiorName"
-                                    Text="{Binding SupervisiorName}"
-                                    Placeholder="Supervisior Name"
-                                    FontSize="16"
-                                    Margin="10,5,5,5"
-                                    IsCurvedCornersEnabled="True"
-                                    HorizontalTextAlignment="Center"
-                                    BorderColor="Gray"
-                                    BorderWidth="2"
-                                    PlaceholderColor="Gray"
-                                    TextColor="Black"
-                                    BackgroundColor="White"
-                                    CornerRadius="16"
-                                    WidthRequest="100" />
+                    <custom:CustomEntry x:Name="name"
+                                        Text="{Binding Name}"
+                                        Placeholder="Name"
+                                        FontSize="16"
+                                        Margin="10,20,5,5"
+                                        IsCurvedCornersEnabled="True"
+                                        HorizontalTextAlignment="Center"
+                                        BorderColor="Gray"
+                                        BorderWidth="2"
+                                        PlaceholderColor="Gray"
+                                        TextColor="Black"
+                                        BackgroundColor="White"
+                                        IsReadOnly="True"
+                                        CornerRadius="16"
+                                        HorizontalOptions="FillAndExpand" />
 
-                  
+                    <custom:CustomEntry x:Name="facility"
+                                        Text="{Binding Facility}"
+                                        Placeholder="Facility"
+                                        FontSize="16"
+                                        Margin="10,5,5,5"
+                                        IsCurvedCornersEnabled="True"
+                                        HorizontalTextAlignment="Center"
+                                        BorderColor="Gray"
+                                        BorderWidth="2"
+                                        PlaceholderColor="Gray"
+                                        TextColor="Black"
+                                        BackgroundColor="White"
+                                        CornerRadius="16"
+                                        HorizontalOptions="FillAndExpand" />
 
-                    
+                    <custom:CustomEntry x:Name="supervisiorName"
+                                        Text="{Binding SupervisiorName}"
+                                        Placeholder="Supervisior Name"
+                                        FontSize="16"
+                                        Margin="10,5,5,5"
+                                        IsCurvedCornersEnabled="True"
+                                        HorizontalTextAlignment="Center"
+                                        BorderColor="Gray"
+                                        BorderWidth="2"
+                                        PlaceholderColor="Gray"
+                                        TextColor="Black"
+                                        BackgroundColor="White"
+                                        CornerRadius="16"
+                                        HorizontalOptions="FillAndExpand" />
+
+
+
+
 
                     <DatePicker x:Name="MainDatePicker"
-                            Format="dd/MM/yyyy"
-                            MinimumDate="1/1/2018"
-                            FontSize="16"
-                            DateSelected="MainDatePicker_DateSelected"
-                            Margin="10,5" />
+                                Format="dd/MM/yyyy"
+                                MinimumDate="1/1/2018"
+                                FontSize="16"
+                                DateSelected="MainDatePicker_DateSelected"
+                                Margin="10,5" />
                     <StackLayout  Orientation="Horizontal"
                                   HorizontalOptions="CenterAndExpand"
-                                  Margin="10,5,5,0"
-                                  VerticalOptions="CenterAndExpand">
+                                  Margin="10,5,5,0">
                         <Label Text="InTime :"
                                VerticalOptions="Center"
                                FontSize="Medium"
                                TextColor="Black"></Label>
                         <TimePicker x:Name="InTimePicker"
-                            FontSize="16"
-                            Margin="10,5">
-                    <TimePicker.Format>hh:mm tt</TimePicker.Format>
-                </TimePicker>
+                                    FontSize="16"
+                                    Margin="10,5">
+                            <TimePicker.Format>hh:mm tt</TimePicker.Format>
+                        </TimePicker>
                         <Label Text="OutTime :"
                                VerticalOptions="Center"
                                TextColor="Black"
                                FontSize="Medium"></Label>
                         <TimePicker x:Name="OutTimePicker"
-                            FontSize="16"
-                            Margin="10,5">
-                    <TimePicker.Format>hh:mm tt</TimePicker.Format>
-                </TimePicker>
-</StackLayout>
-                <custom:CustomEntry x:Name="lunch"
                                     FontSize="16"
-                                    Text="{Binding Lunch}"
-                                    Placeholder="Lunch (In mins)"
-                                    Margin="10,5,5,5"
-                                    IsCurvedCornersEnabled="True"
-                                    HorizontalTextAlignment="Center"
-                                    BorderColor="Gray"
-                                    BorderWidth="2"
-                                    PlaceholderColor="Gray"
-                                    Keyboard="Numeric"
-                                    TextColor="Black"
-                                    BackgroundColor="White"
-                                    CornerRadius="16"
-                                    WidthRequest="100" />
+                                    Margin="10,5">
+                            <TimePicker.Format>hh:mm tt</TimePicker.Format>
+                        </TimePicker>
+                    </StackLayout>
+                    <custom:CustomEntry x:Name="lunch"
+                                        FontSize="16"
+                                        Text="{Binding Lunch}"
+                                        Placeholder="Lunch (In mins)"
+                                        Margin="10,5,5,5"
+                                        IsCurvedCornersEnabled="True"
+                                        HorizontalTextAlignment="Center"
+                                        BorderColor="Gray"
+                                        BorderWidth="2"
+                                        PlaceholderColor="Gray"
+                                        Keyboard="Numeric"
+                                        TextColor="Black"
+                                        BackgroundColor="White"
+                                        CornerRadius="16"
+                                        HorizontalOptions="FillAndExpand" />
 
-                <custom:CustomEntry x:Name="comments"
-                                    FontSize="16"
-                                    Text="{Binding Comments}"
-                                    Placeholder="Comments"
-                                    Margin="10,5,5,5"
-                                    IsCurvedCornersEnabled="True"
-                                    HorizontalTextAlignment="Center"
-                                    BorderColor="Gray"
-                                    BorderWidth="2"
-                                    PlaceholderColor="Gray"
-                                    TextColor="Black"
-                                    BackgroundColor="White"
-                                    CornerRadius="16"
-                                    WidthRequest="100" />
+                    <custom:CustomEntry x:Name="comments"
+                                        FontSize="16"
+                                        Text="{Binding Comments}"
+                                        Placeholder="Comments"
+                                        Margin="10,5,5,5"
+                                        IsCurvedCornersEnabled="True"
+                                        HorizontalTextAlignment="Center"
+                                        BorderColor="Gray"
+                                        BorderWidth="2"
+                                        PlaceholderColor="Gray"
+                                        TextColor="Black"
+                                        BackgroundColor="White"
+                                        CornerRadius="16"
+                                        HorizontalOptions="FillAndExpand" />
 
 
-                <StackLayout  Orientation="Horizontal"
-                              Margin="10,0,5,0"
-                              x:Name="lay_sign_preview"
-                              HorizontalOptions="FillAndExpand"
-                              IsVisible="false"
-                              VerticalOptions="CenterAndExpand">
+                    <StackLayout  Orientation="Horizontal"
+                                  Margin="10,0,5,0"
+                                  x:Name="lay_sign_preview"
+                                  HorizontalOptions="FillAndExpand"
+                                  IsVisible="false"
+                                  VerticalOptions="CenterAndExpand">
 
-                    <Image x:Name="img_Employee_Sign"
-                           Aspect="AspectFit"
-                           HeightRequest="100"
-                           HorizontalOptions="CenterAndExpand">
-                        <Image.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="OnEmployee_SignTapped"
-                                                  NumberOfTapsRequired="1" />
-                        </Image.GestureRecognizers>
-                    </Image>
-                    <Image x:Name="img_Supervisior_Sign"
-                           Aspect="AspectFit"
-                           HeightRequest="100"
-                           HorizontalOptions="CenterAndExpand">
-                        <Image.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="OnSupervisior_SignTapped"
-                                                  NumberOfTapsRequired="1" />
-                        </Image.GestureRecognizers>
-                    </Image>
-                </StackLayout>
+                        <Image x:Name="img_Employee_Sign"
+                               Aspect="AspectFit"
+                               HeightRequest="100"
+                               HorizontalOptions="CenterAndExpand">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnEmployee_SignTapped"
+                                                      NumberOfTapsRequired="1" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                        <Image x:Name="img_Supervisior_Sign"
+                               Aspect="AspectFit"
+                               HeightRequest="100"
+                               HorizontalOptions="CenterAndExpand">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnSupervisior_SignTapped"
+                                                      NumberOfTapsRequired="1" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </StackLayout>
 
-                <StackLayout  Orientation="Horizontal"
-                              HorizontalOptions="CenterAndExpand"
-                              Margin="10,10,5,0"
-                              VerticalOptions="CenterAndExpand">
-                    <Button HorizontalOptions="Center"
-                            VerticalOptions="Center"
-                            Clicked="btnPopupButton_Clicked"
+                    <StackLayout  Orientation="Horizontal"
+                                  HorizontalOptions="CenterAndExpand"
+                                  Margin="10,10,5,0"
+                                  VerticalOptions="CenterAndExpand">
+                        <Button HorizontalOptions="Center"
+                                VerticalOptions="Center"
+                                Clicked="btnPopupButton_Clicked"
                                 BorderColor="Gray"
-                            BorderWidth="1.5"
-                            Background="#FFFFFF"
-                            CornerRadius="10"
-                            Text="Employee Signature"></Button>
-                    <Button HorizontalOptions="Center"
-                            VerticalOptions="Center"
+                                BorderWidth="1.5"
+                                Background="#FFFFFF"
+                                CornerRadius="10"
+                                Text="Employee Signature"></Button>
+                        <Button HorizontalOptions="Center"
+                                VerticalOptions="Center"
                                 BorderColor="Gray"
-                            BorderWidth="1.5"
-                            Background="#FFFFFF"
-                            CornerRadius="10"
-                            Clicked="btnPopupSupervisor_Clicked"
-                            Text="Supervisor Signature"></Button>
-                </StackLayout>
+                                BorderWidth="1.5"
+                                Background="#FFFFFF"
+                                CornerRadius="10"
+                                Clicked="btnPopupSupervisor_Clicked"
+                                Text="Supervisor Signature"></Button>
+                    </StackLayout>
                     <StackLayout  Orientation="Horizontal"
                                   HorizontalOptions="FillAndExpand"
                                   Margin="10,10,5,0"
                                   VerticalOptions="FillAndExpand">
                         <Button x:Name="reportButton"
-                        Text="Report"
-                        Clicked="reportButton_Clicked"
+                                Text="Report"
+                                Clicked="reportButton_Clicked"
                                 TextColor="#FF4081"
                                 BorderColor="#3F51B5"
                                 HorizontalOptions="FillAndExpand"
                                 VerticalOptions="FillAndExpand"
                                 BorderWidth="2"
-                        Background="#FFFFFF"
-                        CornerRadius="10"
+                                Background="#FFFFFF"
+                                CornerRadius="10"
                                 Margin="0,30,0,30">
-                </Button>
+                        </Button>
 
                         <Button x:Name="loginButton"
                                 Text="SAVE"
@@ -198,11 +200,12 @@
                                 Background="#FFFFFF"
                                 CornerRadius="10"
                                 Margin="0,30,0,30"></Button>
-                        </StackLayout>
-
                     </StackLayout>
 
-            <ContentView x:Name="popupImageView"
+                </StackLayout>
+
+
+                <ContentView x:Name="popupImageView"
                          BackgroundColor="#C0808080"
                          Padding="10, 0"
                          IsVisible="false"
